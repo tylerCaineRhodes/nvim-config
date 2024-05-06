@@ -33,6 +33,10 @@ vim.cmd("set splitright")
 vim.cmd("set splitbelow")
 vim.cmd("set scrolloff=1")
 
+
+-- attempt to remap easy-motion
+vim.keymap.set('n', '<Leader>', '<Plug>(easymotion-prefix)', {silent = true, noremap = false})
+
 -- set relative numbers
 vim.keymap.set({ "n", "v" }, "<leader>5", ":set number relativenumber<CR>", {})
 
@@ -41,10 +45,6 @@ vim.keymap.set({ "n", "v" }, "<leader>6", ":set number norelativenumber<CR>", {}
 
 -- set both absolute and relative numbers
 vim.keymap.set({ "n", "v" }, "<leader>7", ":RN<CR>", {})
-
--- search
-vim.keymap.set("n", "<leader>s", ":%s/", {})
-vim.keymap.set("v", "<leader>s", ":s/", {})
 
 -- creating spaces
 vim.keymap.set("n", "<leader>o", "O<Esc>k", {})

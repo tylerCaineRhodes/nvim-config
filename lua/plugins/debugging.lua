@@ -3,6 +3,7 @@ return {
   dependencies = {
     "rcarriga/nvim-dap-ui",
     "suketa/nvim-dap-ruby",
+    "nvim-neotest/nvim-nio"
   },
 
   config = function()

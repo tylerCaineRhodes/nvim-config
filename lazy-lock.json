@@ -20,7 +20,7 @@
   "nui.nvim": { "branch": "main", "commit": "b1b3dcd6ed8f355c78bad3d395ff645be5f8b6ae" },
   "nvim-cmp": { "branch": "main", "commit": "5260e5e8ecadaf13e6b82cf867a909f54e15fd07" },
   "nvim-dap": { "branch": "master", "commit": "09b54e03d43d967c062a7d5b1da445f04e6f3113" },
-  "nvim-dap-ruby": { "branch": "main", "commit": "7b2c026baeedcd5aa0687067ea640767e9d45faf" },
+  "nvim-dap-ruby": { "branch": "main", "commit": "4176405d186a93ebec38a6344df124b1689cfcfd" },
   "nvim-dap-ui": { "branch": "master", "commit": "b7267003ba4dd860350be86f75b9d9ea287cedca" },
   "nvim-lspconfig": { "branch": "master", "commit": "710a8fa7379db32199545f30ea01dd8446b9302f" },
   "nvim-nio": { "branch": "master", "commit": "632024157d01e8bc48fd7df6a7de8ffe3fdd4f3a" },

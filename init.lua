@@ -25,8 +25,3 @@ local opts = {}
 require("vim-settings")
 require("lazy").setup("plugins", opts)
 
--- vim.api.nvim_create_autocmd({"VimEnter", "BufEnter", "WinEnter"}, {
--- callback = function()
--- vim.cmd("RltvNmbr")
--- end,
--- })

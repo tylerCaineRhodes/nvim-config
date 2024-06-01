@@ -39,10 +39,6 @@ vim.cmd([[
 
 -- attempt to remap easy-motion
 vim.keymap.set("n", "<Leader>", "<Plug>(easymotion-prefix)", { silent = true, noremap = false })
-vim.keymap.set("n", "/", "<Plug>(easymotion-sn)", { silent = true, noremap = false })
-vim.keymap.set("o", "/", "<Plug>(easymotion-tn)", { silent = true, noremap = false })
-vim.keymap.set("n", "n", "<Plug>(easymotion-next)", { silent = true, noremap = false })
-vim.keymap.set("n", "N", "<Plug>(easymotion-prev)", { silent = true, noremap = false })
 
 -- set relative numbers
 vim.keymap.set({ "n", "v" }, "<leader>5", ":set number relativenumber<CR>", {})

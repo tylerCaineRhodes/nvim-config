@@ -32,6 +32,10 @@ vim.api.nvim_create_autocmd("VimEnter", {
   callback = set_initial_cwd
 })
 
+-- setting a default macro on @p
+vim.api.nvim_command('command! ReplaceWordRepeatable execute "normal! ciw<C-r>0"')
+vim.api.nvim_set_keymap('n', '@p', ':ReplaceWordRepeatable<CR>', { noremap = true, silent = true })
+
 local opts = {}
 
 require("vim-settings")

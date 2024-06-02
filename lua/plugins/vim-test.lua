@@ -8,6 +8,7 @@ return {
       vim.g["test#strategy"] = "vimux"
 
       vim.cmd("let test#strategy = 'vimux'")
+      -- https://github.com/vim-test/vim-test?tab=readme-ov-file#strategies
 
       vim.keymap.set("n", "<leader>tt", "<cmd>TestNearest<CR>", { desc = "Test nearest" })
       vim.keymap.set("n", "<leader>tl", "<cmd>TestLast<CR>", { desc = "Test last" })

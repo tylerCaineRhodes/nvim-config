@@ -33,10 +33,6 @@ vim.cmd("set splitright")
 vim.cmd("set splitbelow")
 vim.cmd("set scrolloff=1")
 
-vim.cmd([[
-  autocmd BufEnter * silent! lcd %:p:h
-]])
-
 -- attempt to remap easy-motion
 vim.keymap.set("n", "<Leader>", "<Plug>(easymotion-prefix)", { silent = true, noremap = false })
 

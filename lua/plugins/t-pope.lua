@@ -6,4 +6,5 @@ return {
   { "tpope/vim-rails" },
   { "tpope/vim-unimpaired" },
   { "tpope/vim-endwise" },
+  { "tpope/vim-commentary" },
 }

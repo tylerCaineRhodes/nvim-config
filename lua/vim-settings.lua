@@ -60,3 +60,9 @@ vim.keymap.set("v", "[e", ":m '<-2<CR>gv=gv", {})
 -- Map yanked to clipboard
 vim.keymap.set("v", "<C-c>", '"*y', {})
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", {})
+
+-- disable arrow keymappings
+vim.keymap.set({ "n", "v", "i", "c" }, "<Up>", "<Nop>", {})
+vim.keymap.set({ "n", "v", "i", "c" }, "<Down>", "<Nop>", {})
+vim.keymap.set({ "n", "v", "i", "c" }, "<Left>", "<Nop>", {})
+vim.keymap.set({ "n", "v", "i", "c" }, "<Right>", "<Nop>", {})

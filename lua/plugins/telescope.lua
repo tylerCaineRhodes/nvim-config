@@ -5,8 +5,17 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       local builtin = require("telescope.builtin")
-      vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-      vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+      vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind recently opened [F]iles" })
+      vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind code via [G]rep" })
+      vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind [W]ord in project" })
+      vim.keymap.set("n", "<leader>f?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
+      vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[B]uffers" })
+      vim.keymap.set("n", "<leader>f/", function()
+        builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+          winblend = 10,
+          previewer = true,
+        }))
+      end, { desc = "[/] Fuzzily search in current buffer]" })
     end,
   },
   {

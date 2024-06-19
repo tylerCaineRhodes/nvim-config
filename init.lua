@@ -13,13 +13,6 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>fg",
-  "<cmd>lua require('telescope.builtin').live_grep()<CR>",
-  { noremap = true, silent = true }
-)
-
 -- set working directory to what was passed in as an argument to nvim
 local function set_initial_cwd()
   local arg_dir = vim.fn.expand("%:p:h")

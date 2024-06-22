@@ -7,4 +7,6 @@ return {
   { "tpope/vim-unimpaired" },
   { "tpope/vim-endwise" },
   { "tpope/vim-commentary" },
+  { "tpope/vim-dadbod" },
+  { "tpope/vim-dotenv" },
 }

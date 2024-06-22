@@ -45,7 +45,6 @@ return {
         pattern = "TelescopePreviewerLoaded",
         callback = function()
           vim.opt.number = true
-          vim.opt.relativenumber = true
         end,
       })
       require("telescope").load_extension("ui-select")

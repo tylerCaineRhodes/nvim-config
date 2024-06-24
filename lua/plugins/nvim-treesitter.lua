@@ -32,6 +32,8 @@ return {
         "typescript",
         "yaml",
         "tmux",
+        "markdown",
+        "markdown_inline"
       },
       highlight = { enable = true },
       indent = { enable = true },

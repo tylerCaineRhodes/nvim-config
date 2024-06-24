@@ -47,7 +47,7 @@ vim.cmd("set scrolloff=3")
 vim.cmd("nmap <leader>= gg=G``")
 
 -- go to next/prev lines with direction keys
-vim.opt.whichwrap:append("<>[]hl")
+-- vim.opt.whichwrap:append("<>[]hl")
 
 -- attempt to remap easy-motion
 vim.keymap.set("n", "<Leader>", "<Plug>(easymotion-prefix)", { silent = true, noremap = false })

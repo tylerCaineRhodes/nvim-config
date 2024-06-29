@@ -1,8 +1,8 @@
 return {
-	"nvim-treesitter/nvim-treesitter",
-	build = ":TSUpdate",
-	config = function()
-		local config = require("nvim-treesitter.configs")
+  "nvim-treesitter/nvim-treesitter",
+  build = ":TSUpdate",
+  config = function()
+    local config = require("nvim-treesitter.configs")
     config.setup({
       auto_install = true, -- install automatically when it encounters a new language
       ensure_installed = {
@@ -34,6 +34,13 @@ return {
         "tmux",
         "markdown",
         "markdown_inline"
+      },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          node_incremental = "v",
+          node_decremental = "V",
+        },
       },
       highlight = { enable = true },
       indent = { enable = true },
@@ -81,5 +88,5 @@ return {
         },
       },
     })
-	end,
+  end,
 }

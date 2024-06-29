@@ -33,7 +33,11 @@ return {
         "yaml",
         "tmux",
         "markdown",
-        "markdown_inline"
+        "markdown_inline",
+        "c",
+        "cpp",
+        "rust",
+        "go",
       },
       incremental_selection = {
         enable = true,

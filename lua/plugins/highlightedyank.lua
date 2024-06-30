@@ -1,6 +1,6 @@
 return {
-	"machakann/vim-highlightedyank",
-	config = function()
-		vim.g.highlightedyank_highlight_duration = 100
-	end,
+  "machakann/vim-highlightedyank",
+  config = function()
+    vim.g.highlightedyank_highlight_duration = 100
+  end,
 }

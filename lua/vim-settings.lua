@@ -24,11 +24,9 @@ vim.cmd("set nowritebackup")
 vim.cmd("set list")
 vim.cmd("set listchars=tab:»·,trail:·,extends:→,precedes:←,nbsp:␣")
 vim.cmd("set showmatch")
-vim.cmd("set swapfile")
-vim.cmd("set backup")
+vim.cmd("set noswapfile")
+vim.cmd("set nobackup")
 vim.cmd("set breakindent")
-vim.cmd("set directory=~/.vim-tmp,~/tmp,/var/tmp,/tmp")
-vim.cmd("set backupdir=~/.vim-tmp,~/tmp,/var/tmp,/tmp")
 vim.cmd("set smartindent")
 vim.cmd("set smartcase")
 vim.cmd("set smarttab")
@@ -49,6 +47,12 @@ vim.cmd("nmap <leader>= gg=G``")
 -- go to next/prev lines with direction keys
 -- vim.opt.whichwrap:append("<>[]hl")
 
+-- to enable backup and swap files
+-- vim.cmd("set swapfile")
+-- vim.cmd("set backup")
+-- vim.cmd("set directory=~/.vim-tmp,~/tmp,/var/tmp,/tmp")
+-- vim.cmd("set backupdir=~/.vim-tmp,~/tmp,/var/tmp,/tmp")
+
 -- attempt to remap easy-motion
 vim.keymap.set("n", "<Leader>", "<Plug>(easymotion-prefix)", { silent = true, noremap = false })
 
@@ -60,18 +64,6 @@ vim.keymap.set({ "n", "v" }, "<leader>6", ":set number norelativenumber<CR>", {}
 
 -- set both absolute and relative numbers
 vim.keymap.set({ "n", "v" }, "<leader>7", ":RN<CR>", {})
-
--- creating spaces
-vim.keymap.set("n", "<leader>o", "O<Esc>k", {})
-vim.keymap.set("n", "<leader>c", "o<Esc>j", {})
-
--- line moving
-vim.keymap.set("n", "]e", ":m .+1<CR>==", {})
-vim.keymap.set("n", "[e", ":m .-2<CR>==", {})
-vim.keymap.set("i", "]e", "<ESC>:m .+1<CR>==gi", {})
-vim.keymap.set("i", "[e", "<ESC>:m .-2<CR>==gi", {})
-vim.keymap.set("v", "]e", ":m '>+1<CR>gv=gv", {})
-vim.keymap.set("v", "[e", ":m '<-2<CR>gv=gv", {})
 
 -- Map yanked to clipboard
 vim.keymap.set("v", "<C-c>", '"*y', {})

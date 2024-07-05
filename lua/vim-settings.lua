@@ -43,6 +43,7 @@ vim.cmd("set splitright")
 vim.cmd("set splitbelow")
 vim.cmd("set scrolloff=3")
 vim.cmd("nmap <leader>= gg=G``")
+vim.cmd("nmap <leader>y ggyG``")
 
 -- go to next/prev lines with direction keys
 -- vim.opt.whichwrap:append("<>[]hl")

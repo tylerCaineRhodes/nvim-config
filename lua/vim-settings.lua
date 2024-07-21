@@ -41,7 +41,7 @@ vim.cmd("set smartcase")
 vim.cmd("set autoread")
 vim.cmd("set splitright")
 vim.cmd("set splitbelow")
-vim.cmd("set scrolloff=3")
+vim.cmd("set scrolloff=1")
 vim.cmd("nmap <leader>= gg=G``")
 vim.cmd("nmap <leader>y ggyG``")
 

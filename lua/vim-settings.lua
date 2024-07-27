@@ -45,6 +45,10 @@ vim.cmd("set scrolloff=1")
 vim.cmd("nmap <leader>= gg=G``")
 vim.cmd("nmap <leader>y ggyG``")
 
+vim.api.nvim_exec([[
+  autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
+]], false)
+
 -- go to next/prev lines with direction keys
 -- vim.opt.whichwrap:append("<>[]hl")
 

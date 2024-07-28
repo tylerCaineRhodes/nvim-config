@@ -58,9 +58,6 @@ vim.api.nvim_exec([[
 -- vim.cmd("set directory=~/.vim-tmp,~/tmp,/var/tmp,/tmp")
 -- vim.cmd("set backupdir=~/.vim-tmp,~/tmp,/var/tmp,/tmp")
 
--- attempt to remap easy-motion
-vim.keymap.set("n", "<Leader>", "<Plug>(easymotion-prefix)", { silent = true, noremap = false })
-
 -- set relative numbers
 vim.keymap.set({ "n", "v" }, "<leader>5", ":set number relativenumber<CR>", {})
 

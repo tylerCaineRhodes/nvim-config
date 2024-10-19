@@ -8,5 +8,12 @@ return {
   { "tpope/vim-endwise" },
   { "tpope/vim-commentary" },
   { "tpope/vim-dadbod" },
+  {
+    "tpope/vim-dispatch",
+    config = function()
+      vim.g.dispatch_no_maps = 1
+    end,
+  },
   { "tpope/vim-dotenv" },
+
 }

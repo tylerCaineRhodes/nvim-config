@@ -4,6 +4,7 @@ return {
   { "tpope/vim-abolish" },
   { "tpope/vim-repeat" },
   { "tpope/vim-rails" },
+  { "tpope/vim-bundler" },
   { "tpope/vim-unimpaired" },
   { "tpope/vim-endwise" },
   { "tpope/vim-commentary" },

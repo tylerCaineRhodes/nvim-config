@@ -37,7 +37,7 @@ return {
         },
         file_sorter = require("telescope.sorters").get_fuzzy_file,
         file_ignore_patterns = { "node_modules" },
-        generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+        generic_sorter = require("telescope.sorters").get_fzy_sorter,
         path_display = { "truncate" },
         winblend = 10,
         border = {},

@@ -49,6 +49,7 @@ return {
       },
       highlight = { enable = true },
       indent = { enable = true },
+      fold = { enable = true },
       textobjects = {
         select = {
           enable = true,
@@ -93,5 +94,8 @@ return {
         },
       },
     })
+    vim.o.foldmethod = "expr"
+    vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+    vim.o.foldlevelstart = 99
   end,
 }

@@ -92,6 +92,10 @@ return {
               ["<C-p>"] = require("telescope.actions").move_selection_previous,
               ["<C-c>"] = require("telescope.actions").close,
             },
+            n = { -- Normal mode mappings
+              ["<C-t>"] = require("telescope.actions").select_tab,        -- Open selection in a new tab
+              ["<C-v>"] = require("telescope.actions").select_vertical,   -- Open selection in a vertical split
+            },
           },
         },
       })

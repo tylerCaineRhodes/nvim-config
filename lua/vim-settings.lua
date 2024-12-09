@@ -73,3 +73,15 @@ vim.keymap.set({ "n", "v" }, "<leader>7", ":RN<CR>", {})
 vim.keymap.set("v", "<C-c>", '"*y', {})
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", {})
 
+vim.keymap.set("n", "<leader>cf", function()
+  local filepath = vim.api.nvim_buf_get_name(0)
+  vim.fn.setreg("+", filepath)
+  print("Copied full path to clipboard: " .. filepath)
+end, { desc = "Copy full file path to clipboard" })
+
+vim.keymap.set("n", "<leader>cd", function()
+  local dirname = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":h")
+  vim.fn.setreg("+", dirname)
+  print("Copied directory path to clipboard: " .. dirname)
+end, { desc = "Copy directory path to clipboard" })
+

@@ -9,6 +9,7 @@ return {
   { "tpope/vim-endwise" },
   { "tpope/vim-commentary" },
   { "tpope/vim-dadbod" },
+  { "tpope/vim-projectionist" },
   {
     "tpope/vim-dispatch",
     config = function()

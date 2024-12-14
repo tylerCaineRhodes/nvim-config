@@ -79,5 +79,25 @@ if exists("+showtabline")
 endif
 ]])
 
+-- rails projecsts custom alternate files
+vim.g.rails_projections = vim.tbl_extend("force", vim.g.rails_projections or {}, {
+  ["app/controllers/*_controller.rb"] = {
+    alternate = "spec/requests/{}_spec.rb",
+    type = "controller"
+  },
+  ["spec/requests/*_spec.rb"] = {
+    alternate = "app/controllers/{}_controller.rb",
+    type = "request"
+  },
+  ["app/models/user.rb"] = {
+    alternate = "spec/models/_user/user_spec.rb",
+    type = "model"
+  },
+  ["spec/models/_user/user_spec.rb"] = {
+    alternate = "app/models/user.rb",
+    type = "model"
+  }
+})
+
 require("vim-settings")
 require("lazy").setup("plugins", opts)

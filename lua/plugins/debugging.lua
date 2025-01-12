@@ -5,7 +5,7 @@ return {
     "suketa/nvim-dap-ruby",
     "nvim-neotest/nvim-nio"
   },
-
+  ft = { "ruby", "javascript", "python" },
   config = function()
     local dap, dapui = require("dap"), require("dapui")
 

@@ -30,6 +30,7 @@ return {
         "regex",
         "sql",
         "typescript",
+        "tsx",
         "yaml",
         "tmux",
         "markdown",
@@ -93,6 +94,10 @@ return {
           },
         },
       },
+      context_commentstring = {
+        enable = true,
+        enable_autocmd = false,
+      }
     })
     vim.o.foldmethod = "expr"
     vim.o.foldexpr = "nvim_treesitter#foldexpr()"

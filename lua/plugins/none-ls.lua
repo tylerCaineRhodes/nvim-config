@@ -6,7 +6,9 @@ return {
       debug = true,
       sources = {
         null_ls.builtins.formatting.stylua,
-        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.formatting.prettier.with({
+          filetypes = { "javascript", "typescript", "typescriptreact" },
+        }),
         null_ls.builtins.formatting.black,
         null_ls.builtins.formatting.isort,
         null_ls.builtins.formatting.rubocop,

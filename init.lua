@@ -178,5 +178,15 @@ vim.g.rails_projections = vim.tbl_deep_extend("force", default_rails_projections
   }
 })
 
+function ChangeTestStrategy(strategy)
+  vim.g["test#strategy"] = strategy
+  print("Test strategy changed to: " .. strategy)
+end
+
+vim.api.nvim_create_user_command("TestStrategy", function(inner_options)
+  vim.g["test#strategy"] = inner_options.args
+  print("Test strategy changed to: " .. inner_options.args)
+end, { nargs = 1 })
+
 require("vim-settings")
 require("lazy").setup("plugins", opts)

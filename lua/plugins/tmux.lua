@@ -1,1 +1,4 @@
-return { "sjl/vitality.vim" }
+return {
+  { "sjl/vitality.vim" },
+  { "preservim/vimux" },
+}

@@ -1,8 +1,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- if you want to start with both by default
 vim.g.rltvnmbr = false
+vim.g.smoothscroll = true
+vim.opt.cursorline = true
 
 vim.cmd("set number")
 vim.cmd("set expandtab")
@@ -35,7 +36,6 @@ vim.cmd("set smartcase")
 vim.cmd("set smarttab")
 vim.cmd("set incsearch")
 vim.cmd("set hlsearch")
-vim.cmd("set cursorline")
 vim.cmd("set hidden")
 vim.cmd("set updatetime=250")
 vim.cmd("set history=1024")
@@ -44,7 +44,7 @@ vim.cmd("set smartcase")
 vim.cmd("set autoread")
 vim.cmd("set splitright")
 vim.cmd("set splitbelow")
-vim.cmd("set scrolloff=1")
+vim.cmd("set scrolloff=4")
 vim.cmd("nmap <leader>= gg=G``")
 vim.cmd("nmap <leader>y ggyG``")
 vim.cmd("inoremap jk <esc>")

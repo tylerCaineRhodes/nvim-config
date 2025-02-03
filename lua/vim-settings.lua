@@ -1,5 +1,5 @@
-vim.g.mapleader = ","
-vim.g.maplocalleader = ";"
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 vim.cmd("set number")
 vim.cmd("set expandtab")
@@ -46,6 +46,8 @@ vim.cmd("nmap <leader>= gg=G``")
 vim.cmd("nmap <leader>y ggyG``")
 vim.cmd("inoremap jk <esc>")
 vim.cmd("vnoremap jk <esc>")
+
+  vim.opt.showmode = false -- don't show twice when using lualine
 
 vim.api.nvim_exec([[
   autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })

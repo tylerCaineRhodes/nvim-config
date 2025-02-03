@@ -85,7 +85,12 @@ vim.keymap.set("n", "<leader>cd", function()
   print("Copied directory path to clipboard: " .. dirname)
 end, { desc = "Copy directory path to clipboard" })
 
--- vimux toggle pane
+-- vimux open pane
 vim.keymap.set("n", "<leader>T", function()
     vim.fn.VimuxOpenRunner()
+end, { silent = true })
+
+-- vimux close pane
+vim.keymap.set("n", "<leader>t", function()
+    vim.fn.VimuxCloseRunner()
 end, { silent = true })

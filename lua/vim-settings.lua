@@ -1,6 +1,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- if you want to start with both by default
+vim.g.rltvnmbr = false
+
 vim.cmd("set number")
 vim.cmd("set expandtab")
 vim.cmd("set tabstop=2")

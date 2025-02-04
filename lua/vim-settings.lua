@@ -50,7 +50,7 @@ vim.cmd("nmap <leader>y ggyG``")
 vim.cmd("inoremap jk <esc>")
 vim.cmd("vnoremap jk <esc>")
 
-  vim.opt.showmode = false -- don't show twice when using lualine
+vim.opt.showmode = false -- don't show twice when using lualine
 
 vim.api.nvim_exec([[
   autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })

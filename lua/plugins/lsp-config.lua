@@ -48,9 +48,23 @@ return {
         capabilities = capabilities,
       })
 
-      vim.keymap.set("n", "gh", vim.lsp.buf.hover, {})
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+      vim.api.nvim_create_autocmd('LspAttach', {
+        group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+        callback = function(event)
+          vim.keymap.set("n", 'gd', require('telescope.builtin').lsp_definitions, { buffer = event.buf, desc = '[G]oto [D]efinition' })
+          vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+          vim.keymap.set("n", "gr", function()
+            require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") })
+          end, { desc = "[G]rep References with Ripgrep" })
+
+          vim.keymap.set("n", "<leader>gr", function()
+            require("telescope.builtin").grep_string({
+              search = vim.fn.expand("<cword>"),
+              additional_args = function() return { "--case-sensitive" } end
+            })
+          end, { desc = "[G]rep References with Ripgrep (Case Sensitive)" })
+        end,
+      })
     end,
   },
 }

@@ -48,7 +48,6 @@ vim.cmd("set scrolloff=4")
 vim.cmd("nmap <leader>= gg=G``")
 vim.cmd("nmap <leader>y ggyG``")
 vim.cmd("inoremap jk <esc>")
-vim.cmd("vnoremap jk <esc>")
 
 vim.opt.showmode = false -- don't show twice when using lualine
 
@@ -101,7 +100,7 @@ vim.keymap.set("n", "<leader>T", function()
 end, { silent = true })
 
 -- cycle through capital marks across buffers
-vim.keymap.set('n', '<leader>mm', function()
+vim.keymap.set("n", "<leader>mm", function()
   local marks = vim.fn.getmarklist()
   local capitals = {}
 
@@ -148,4 +147,3 @@ vim.keymap.set('n', '<leader>mm', function()
   vim.api.nvim_set_current_buf(first_mark.bufnr)
   vim.api.nvim_win_set_cursor(0, { first_mark.line, first_mark.col })
 end, { desc = "Cycle through capital marks across buffers" })
-

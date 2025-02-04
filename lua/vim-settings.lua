@@ -91,13 +91,13 @@ vim.keymap.set("n", "<leader>cd", function()
 end, { desc = "Copy directory path to clipboard" })
 
 -- vimux open pane
-vim.keymap.set("n", "<leader>T", function()
-    vim.fn.VimuxOpenRunner()
+vim.keymap.set("n", "<leader>t", function()
+  vim.fn.VimuxOpenRunner()
 end, { silent = true })
 
 -- vimux close pane
-vim.keymap.set("n", "<leader>t", function()
-    vim.fn.VimuxCloseRunner()
+vim.keymap.set("n", "<leader>T", function()
+  vim.fn.VimuxCloseRunner()
 end, { silent = true })
 
 -- cycle through capital marks across buffers

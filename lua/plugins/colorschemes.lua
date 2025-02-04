@@ -3,4 +3,5 @@ return {
   { "haishanh/night-owl.vim" },
   { "ayu-theme/ayu-vim" },
   { "folke/tokyonight.nvim" },
+  { "chriskempson/vim-tomorrow-theme" },
 }

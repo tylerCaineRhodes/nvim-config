@@ -99,3 +99,53 @@ end, { silent = true })
 vim.keymap.set("n", "<leader>t", function()
     vim.fn.VimuxCloseRunner()
 end, { silent = true })
+
+-- cycle through capital marks across buffers
+vim.keymap.set('n', '<leader>mm', function()
+  local marks = vim.fn.getmarklist()
+  local capitals = {}
+
+  for _, mark in ipairs(marks) do
+    local m = mark.mark
+    local pos = mark.pos or {}
+
+    if m and m:match("^'[A-Z]$") and #pos >= 3 then
+      local file = mark.file
+      local bufnr = file and vim.fn.bufnr(file) or -1
+
+      if bufnr == -1 and file then
+        vim.cmd("edit " .. vim.fn.fnameescape(file))
+        bufnr = vim.fn.bufnr(file)
+      end
+
+      if bufnr ~= -1 then
+        table.insert(capitals, { mark = m, bufnr = bufnr, line = pos[2], col = pos[3] })
+      end
+    end
+  end
+
+  if #capitals == 0 then
+    print("No valid capital marks found")
+    return
+  end
+
+  table.sort(capitals, function(a, b)
+    return a.bufnr == b.bufnr and a.line < b.line or a.bufnr < b.bufnr
+  end)
+
+  local cur_buf = vim.api.nvim_get_current_buf()
+  local cur_line = vim.api.nvim_win_get_cursor(0)[1]
+
+  for _, mark in ipairs(capitals) do
+    if mark.bufnr > cur_buf or (mark.bufnr == cur_buf and mark.line > cur_line) then
+      vim.api.nvim_set_current_buf(mark.bufnr)
+      vim.api.nvim_win_set_cursor(0, { mark.line, mark.col })
+      return
+    end
+  end
+
+  local first_mark = capitals[1]
+  vim.api.nvim_set_current_buf(first_mark.bufnr)
+  vim.api.nvim_win_set_cursor(0, { first_mark.line, first_mark.col })
+end, { desc = "Cycle through capital marks across buffers" })
+

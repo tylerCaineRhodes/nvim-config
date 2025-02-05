@@ -21,6 +21,11 @@ return {
         annotate = false,
       },
     })
+
+    vim.keymap.set("n", "<leader>mf", ":MarksQFListBuf<CR>", {})
+    vim.keymap.set("n", "<leader>mc", ":MarksQFListGlobal<CR>", {})
+    vim.keymap.set("n", "<leader>mq", ":MarksQFListAll<CR>", {})
+    vim.keymap.set("n", "<leader>mt", ":MarksToggleSigns<CR>", {})
   end,
 }
 

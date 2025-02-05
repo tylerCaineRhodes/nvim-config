@@ -3,6 +3,7 @@ return {
   event = "VeryLazy",
   config = function()
     require("chatgpt").setup()
+    vim.keymap.set("v", "<leader>k", ":ChatGPTEditWithInstructions<CR>", {})
   end,
   dependencies = {
     "MunifTanjim/nui.nvim",

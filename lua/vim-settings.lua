@@ -4,6 +4,7 @@ vim.g.maplocalleader = " "
 vim.g.rltvnmbr = false
 vim.g.smoothscroll = true
 vim.opt.cursorline = true
+vim.g.annotate_marks = false
 
 vim.cmd("set number")
 vim.cmd("set expandtab")

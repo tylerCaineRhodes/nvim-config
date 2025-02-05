@@ -22,10 +22,13 @@ return {
       },
     })
 
-    vim.keymap.set("n", "<leader>mf", ":MarksQFListBuf<CR>", {})
-    vim.keymap.set("n", "<leader>mc", ":MarksQFListGlobal<CR>", {})
-    vim.keymap.set("n", "<leader>mq", ":MarksQFListAll<CR>", {})
-    vim.keymap.set("n", "<leader>mt", ":MarksToggleSigns<CR>", {})
+    vim.api.nvim_set_keymap('n', '<leader>mf', ':MarksQFListBuf<CR>', {})
+    vim.api.nvim_set_keymap('n', '<leader>mc', ':MarksQFListGlobal<CR>', {})
+    vim.api.nvim_set_keymap('n', '<leader>mq', ':MarksQFListAll<CR>', {})
+    vim.api.nvim_set_keymap('n', '<leader>mt', ':MarksToggleSigns<CR>', {})
+
+    if not vim.g.annotate_marks then
+      vim.cmd(':MarksToggleSigns')
+    end
   end,
 }
-

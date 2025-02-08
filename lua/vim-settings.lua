@@ -2,8 +2,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.g.rltvnmbr = false
-vim.g.smoothscroll = true
-vim.opt.cursorline = true
+vim.g.smoothscroll = false
+vim.opt.cursorline = false
 vim.g.annotate_marks = false
 
 vim.cmd("set number")

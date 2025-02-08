@@ -8,7 +8,10 @@ return {
   { "tpope/vim-bundler" },
   { "tpope/vim-unimpaired" },
   { "tpope/vim-endwise" },
-  { "tpope/vim-commentary" },
+  {
+    "tpope/vim-commentary",
+    event = "BufReadPre" ,
+  },
   { "tpope/vim-dadbod" },
   { "tpope/vim-projectionist" },
   {

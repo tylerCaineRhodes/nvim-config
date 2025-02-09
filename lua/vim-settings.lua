@@ -6,6 +6,7 @@ vim.g.smoothscroll = false
 vim.opt.cursorline = false
 vim.g.annotate_marks = false
 
+vim.cmd("let g:VimuxHeight = '30%'")
 vim.cmd("set number")
 vim.cmd("set expandtab")
 vim.cmd("set tabstop=2")

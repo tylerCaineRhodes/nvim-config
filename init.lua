@@ -188,6 +188,13 @@ vim.api.nvim_create_user_command("TestStrategy", function(inner_options)
   print("Test strategy changed to: " .. inner_options.args)
 end, { nargs = 1 })
 
+-- close all buffers except the current one
+vim.api.nvim_create_user_command(
+  'Bufo',
+  '%bd|e#|bd#',
+  {}
+)
+
 require("vim-settings")
 require("lazy").setup("plugins", opts)
 

@@ -9,6 +9,7 @@ return {
       vim.cmd("set tabline=")
       require('bufferline').setup {
         options = {
+          numbers = "buffer_id",
           themable = false,
           diagnostics = "nvim_lsp",
           show_tab_indicators = true,

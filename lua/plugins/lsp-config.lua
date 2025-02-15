@@ -53,9 +53,10 @@ return {
         callback = function(event)
           vim.keymap.set("n", 'gd', require('telescope.builtin').lsp_definitions, { buffer = event.buf, desc = '[G]oto [D]efinition' })
           vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+
           vim.keymap.set("n", "gr", function()
-            require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") })
-          end, { desc = "[G]rep References with Ripgrep" })
+            vim.lsp.buf.references()
+          end, { desc = "LSP References" })
 
           vim.keymap.set("n", "<leader>gr", function()
             require("telescope.builtin").grep_string({

@@ -96,6 +96,12 @@ vim.api.nvim_create_user_command(
   {}
 )
 
+vim.api.nvim_create_user_command(
+  'Delmark',
+  'delmark A-Za-z',
+  {}
+)
+
 require("vim-settings")
 require("lazy").setup("plugins", opts)
 

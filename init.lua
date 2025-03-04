@@ -91,8 +91,15 @@ end, { nargs = 1 })
 
 -- close all buffers except the current one
 vim.api.nvim_create_user_command(
-  'Bufo',
+ 'Bufo',
   '%bd|e#|bd#',
+  {}
+)
+
+-- close every buffer
+vim.api.nvim_create_user_command(
+  'Bufc',
+  '%bd',
   {}
 )
 

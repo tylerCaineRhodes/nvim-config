@@ -1,5 +1,6 @@
 return {
   "github/copilot.vim",
-  lazy = false,
+  lazy = true,
   priority = 1000,
+  cmd = "Copilot enable"
 }

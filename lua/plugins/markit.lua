@@ -1,6 +1,9 @@
 return {
   '2kabhishek/markit.nvim',
   event = { 'BufReadPre', 'BufNewFile' },
+  dependencies = {
+    'chentoast/marks.nvim',
+  },
   config = function()
     require('marks').setup({
       default_mappings = true,

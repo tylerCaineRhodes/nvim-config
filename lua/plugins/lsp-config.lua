@@ -18,6 +18,7 @@ return {
           "jedi_language_server",
           "pylsp",
           "ruby_lsp",
+          "clangd"
         },
       })
     end,

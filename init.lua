@@ -89,9 +89,22 @@ vim.api.nvim_create_user_command("TestStrategy", function(inner_options)
   print("Test strategy changed to: " .. inner_options.args)
 end, { nargs = 1 })
 
+
+vim.api.nvim_create_user_command('Google', function(o)
+  local escaped = vim.uri_encode(o.args)
+  local url = ('https://www.google.com/search?q=%s'):format(escaped)
+  vim.ui.open(url)
+end, { nargs = 1, desc = 'just google it' })
+
+vim.api.nvim_create_user_command('DuckDuckGo', function(o)
+  local escaped = vim.uri_encode(o.args)
+  local url = ('https://duckduckgo.com/?q=%s'):format(escaped)
+  vim.ui.open(url)
+end, { nargs = 1, desc = 'just google i mean duckduckgo it' })
+
 -- close all buffers except the current one
 vim.api.nvim_create_user_command(
- 'Bufo',
+  'Bufo',
   '%bd|e#|bd#',
   {}
 )

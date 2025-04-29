@@ -1,14 +1,17 @@
 return {
   {
     "williamboman/mason.nvim",
+    lazy = true,
+    cmd = "Mason",
     config = function()
-      -- install language lsps with :Mason
       require("mason").setup()
     end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
-
+    lazy = true,
+    dependencies = { "mason.nvim" },
+    event = "BufReadPre",
     config = function()
       require("mason-lspconfig").setup({
         ensure_installed = {
@@ -24,47 +27,58 @@ return {
     end,
   },
   {
-    -- :LspInfo to see what language servers are running
     "neovim/nvim-lspconfig",
+    event = "BufReadPre",
+    dependencies = {
+      "mason-lspconfig.nvim",
+      "hrsh7th/cmp-nvim-lsp", -- for capabilities
+    },
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local lspconfig = require("lspconfig")
+      local servers = {
+        lua_ls = {},
+        ts_ls = {},
+        html = {},
+        jedi_language_server = {},
+        pylsp = {},
+        ruby_lsp = {},
+        clangd = {},
+      }
 
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-      })
-      lspconfig.ts_ls.setup({
-        capabilities = capabilities,
-      })
-      lspconfig.html.setup({
-        capabilities = capabilities,
-      })
-      lspconfig.jedi_language_server.setup({
-        capabilities = capabilities,
-      })
-      lspconfig.pylsp.setup({
-        capabilities = capabilities,
-      })
-      lspconfig.ruby_lsp.setup({
-        capabilities = capabilities,
-      })
+      for server, config in pairs(servers) do
+        config.capabilities = capabilities
+        lspconfig[server].setup(config)
+      end
 
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
-        callback = function(event)
-          vim.keymap.set("n", 'gd', require('telescope.builtin').lsp_definitions, { buffer = event.buf, desc = '[G]oto [D]efinition' })
-          vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
 
-          vim.keymap.set("n", "gr", function()
-            vim.lsp.buf.references()
-          end, { desc = "LSP References" })
+        callback = function(event)
+          local opts = { buffer = event.buf }
+
+          vim.keymap.set("n", 'gd', require('telescope.builtin').lsp_definitions,
+            vim.tbl_extend("force", opts, { desc = '[G]oto [D]efinition' }))
+
+
+          vim.keymap.set({ "n", "v" }, "<leader>ca", function()
+            require("lazy").load({ plugins = { "telescope-ui-select.nvim" } })
+            vim.schedule(function()
+              vim.lsp.buf.code_action()
+            end)
+          end, opts)
+
+          vim.keymap.set("n", "gr", vim.lsp.buf.references,
+            vim.tbl_extend("force", opts, { desc = "LSP References" }))
 
           vim.keymap.set("n", "<leader>gr", function()
             require("telescope.builtin").grep_string({
               search = vim.fn.expand("<cword>"),
-              additional_args = function() return { "--case-sensitive" } end
+              additional_args = function() return { "--case-sensitive" } end,
             })
-          end, { desc = "[G]rep References with Ripgrep (Case Sensitive)" })
+          end, vim.tbl_extend("force", opts, {
+            desc = "[G]rep References with Ripgrep (Case Sensitive)"
+          }))
         end,
       })
     end,

@@ -11,7 +11,7 @@ return {
     vim.keymap.set({ "n", "v" }, "<leader>ct", ":ChatGPTRun translate<CR>", {})
     vim.keymap.set({ "n", "v" }, "<leader>ck", ":ChatGPTRun keywords<CR>", {})
     vim.keymap.set({ "n", "v" }, "<leader>cc", ":ChatGPTRun docstring<CR>", {})
-    vim.keymap.set({ "n", "v" }, "<leader>ca", ":ChatGPTRun add_tests<CR>", {})
+    vim.keymap.set({ "n", "v" }, "<leader>ca", ":ChatGPTRun add_tests<CR>", {}) -- TODO: conflicts with code actions
     vim.keymap.set({ "n", "v" }, "<leader>co", ":ChatGPTRun optimize_code<CR>", {})
     vim.keymap.set({ "n", "v" }, "<leader>cs", ":ChatGPTRun summarize<CR>", {})
     vim.keymap.set({ "n", "v" }, "<leader>cb", ":ChatGPTRun fix_bugs<CR>", {})

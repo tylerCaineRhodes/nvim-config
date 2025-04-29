@@ -97,6 +97,7 @@ vim.keymap.set("n", "<leader>t", function()
 end, { silent = true })
 
 -- vimux close pane
+
 vim.keymap.set("n", "<leader>T", function()
   vim.fn.VimuxCloseRunner()
 end, { silent = true })

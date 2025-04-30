@@ -126,4 +126,4 @@ require("vim-settings")
 require("lazy").setup("plugins", opts)
 
 -- Load the colorscheme
-vim.cmd("colorscheme github_dark_dimmed")
+ vim.cmd("colorscheme github_dark_dimmed")

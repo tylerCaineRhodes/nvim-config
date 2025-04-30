@@ -18,7 +18,17 @@ return {
   keys = {
     --scratch
     { "<leader>.",  function() Snacks.scratch() end,               desc = "Toggle Scratch Buffer" },
-    { "<leader>S",  function() Snacks.scratch.select() end,        desc = "Select Scratch Buffer" },
+    {
+      "<leader>S",
+      function()
+        require('lazy').load({ plugins = { "telescope-ui-select.nvim" } })
+        vim.schedule(function()
+          Snacks.scratch.select()
+        end
+        )
+      end,
+      desc = "Select Scratch Buffer"
+    },
 
     -- bd
     { "<leader>bd", function() Snacks.bufdelete() end,             desc = "Delete Buffer" },

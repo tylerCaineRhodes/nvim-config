@@ -17,8 +17,8 @@ return {
 
     local function set_rel_number_colors()
       local normal_bg = vim.api.nvim_get_hl(0, { name = "LineNr" }).bg
-      local primary_fg = 'yellow'
-      local secondary_fg = 'magenta'
+      local primary_fg = "#AAE682"
+      local secondary_fg = "#FF7878"
 
       vim.cmd(string.format(
         "highlight HL_RltvNmbr_Minus gui=none,italic guifg=%s guibg=%s",

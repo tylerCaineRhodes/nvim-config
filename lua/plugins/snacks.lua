@@ -7,7 +7,7 @@ return {
     quickfile = { enabled = true },
     scope = { enabled = true },
     input = { enabled = false },
-    indent = { enabled = false },
+    indent = { enabled = true },
     words = { enabled = false },
     notifier = {
       enabled = true,
@@ -37,5 +37,8 @@ return {
     -- notifications
     { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
     { "<leader>un", function() Snacks.notifier.hide() end,         desc = "Dismiss All Notifications" },
+    -- indent guides
+    { "<leader>ug", function() Snacks.indent.disable() end,        desc = "Disable indent guides" },
+    { "<leader>uG", function() Snacks.indent.enable() end,         desc = "Enable indent guides" },
   }
 }

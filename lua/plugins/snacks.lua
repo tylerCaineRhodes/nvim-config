@@ -40,5 +40,16 @@ return {
     -- indent guides
     { "<leader>ug", function() Snacks.indent.disable() end,        desc = "Disable indent guides" },
     { "<leader>uG", function() Snacks.indent.enable() end,         desc = "Enable indent guides" },
-  }
+  },
+  config = function()
+    vim.api.nvim_create_user_command("Pedantic", function()
+      vim.opt.cursorline = true
+      require("snacks").indent.enable()
+    end, { nargs = 0, desc = "Add indent guides and cursorline" })
+
+    vim.api.nvim_create_user_command( "Simple", function()
+      vim.opt.cursorline = false
+      require("snacks").indent.disable()
+    end, { nargs = 0, desc = "Remove indent guides and cursorline" })
+  end,
 }

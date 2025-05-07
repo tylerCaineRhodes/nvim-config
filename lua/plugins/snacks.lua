@@ -7,7 +7,7 @@ return {
     quickfile = { enabled = true },
     scope = { enabled = true },
     input = { enabled = false },
-    indent = { enabled = true },
+    indent = { enabled = false },
     words = { enabled = false },
     notifier = {
       enabled = true,

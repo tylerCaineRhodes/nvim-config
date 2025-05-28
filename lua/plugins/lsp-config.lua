@@ -20,7 +20,6 @@ return {
           "html",
           "jedi_language_server",
           "pylsp",
-          "ruby_lsp",
           "clangd"
         },
       })
@@ -42,7 +41,10 @@ return {
         html = {},
         jedi_language_server = {},
         pylsp = {},
-        ruby_lsp = {},
+        ruby_lsp = {
+          mason = false,
+          cmd = { vim.fn.expand("~/.rbenv/shims/ruby-lsp") }
+        },
         clangd = {},
       }
 

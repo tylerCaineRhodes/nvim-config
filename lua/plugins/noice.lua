@@ -1,5 +1,7 @@
 return {
   "folke/noice.nvim",
+
+  -- comment this back out later
   config = function()
     require("noice").setup({
       cmdline = { view = 'cmdline' },
@@ -18,5 +20,8 @@ return {
       },
     })
   end,
-  dependencies = { "MunifTanjim/nui.nvim" },
+  dependencies = {
+    "MunifTanjim/nui.nvim",
+    -- "rcarriga/nvim-notify"
+  },
 }

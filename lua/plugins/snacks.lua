@@ -11,8 +11,9 @@ return {
     words = { enabled = false },
     notifier = {
       enabled = true,
-      timeout = 3000,
+      -- timeout = 3000,
     },
+    notify = { enabled = true },
     scratch = { enabled = true },
   },
   keys = {
@@ -35,7 +36,7 @@ return {
     -- rename
     { "<leader>cR", function() Snacks.rename.rename_file() end,    desc = "Rename File" },
     -- notifications
-    { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
+    -- { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
     { "<leader>un", function() Snacks.notifier.hide() end,         desc = "Dismiss All Notifications" },
     -- indent guides
     { "<leader>ug", function() Snacks.indent.disable() end,        desc = "Disable indent guides" },
@@ -47,7 +48,7 @@ return {
       require("snacks").indent.enable()
     end, { nargs = 0, desc = "Add indent guides and cursorline" })
 
-    vim.api.nvim_create_user_command( "Simple", function()
+    vim.api.nvim_create_user_command("Simple", function()
       vim.opt.cursorline = false
       require("snacks").indent.disable()
     end, { nargs = 0, desc = "Remove indent guides and cursorline" })

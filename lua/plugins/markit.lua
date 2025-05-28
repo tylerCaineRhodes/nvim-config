@@ -1,6 +1,7 @@
 return {
   '2kabhishek/markit.nvim',
-  event = { 'BufReadPre', 'BufNewFile' },
+  -- event = { 'BufReadPre', 'BufNewFile' },
+  cmd = 'MarksToggleSigns',
   dependencies = {
     'chentoast/marks.nvim',
   },
@@ -10,7 +11,7 @@ return {
       -- builtin_marks = { ".", "<", ">", "^" },
       cyclic = true,
       force_write_shada = false,
-      sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
+      sign_priority = { lower = 10, upper = 15, builtin = 8, bookmark = 20 },
       excluded_filetypes = {},
       excluded_buftypes = {},
       bookmark_0 = {

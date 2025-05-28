@@ -103,7 +103,7 @@ vim.keymap.set("n", "<leader>T", function()
 end, { silent = true })
 
 -- cycle through capital marks across buffers
-vim.keymap.set("n", "<leader>mm", function()
+local function collect_capital_marks()
   local marks = vim.fn.getmarklist()
   local capitals = {}
 
@@ -126,27 +126,40 @@ vim.keymap.set("n", "<leader>mm", function()
     end
   end
 
-  if #capitals == 0 then
-    print("No valid capital marks found")
-    return
-  end
-
   table.sort(capitals, function(a, b)
     return a.bufnr == b.bufnr and a.line < b.line or a.bufnr < b.bufnr
   end)
 
-  local cur_buf = vim.api.nvim_get_current_buf()
-  local cur_line = vim.api.nvim_win_get_cursor(0)[1]
+  return capitals
+end
 
-  for _, mark in ipairs(capitals) do
-    if mark.bufnr > cur_buf or (mark.bufnr == cur_buf and mark.line > cur_line) then
-      vim.api.nvim_set_current_buf(mark.bufnr)
-      vim.api.nvim_win_set_cursor(0, { mark.line, mark.col })
-      return
-    end
+local function jump_to_capital(offset)
+  local capitals = collect_capital_marks()
+  if #capitals == 0 then
+    print("No capital marks found")
+    return
   end
 
-  local first_mark = capitals[1]
-  vim.api.nvim_set_current_buf(first_mark.bufnr)
-  vim.api.nvim_win_set_cursor(0, { first_mark.line, first_mark.col })
-end, { desc = "Cycle through capital marks across buffers" })
+  vim.g._capital_mark_index = (vim.g._capital_mark_index or 0) + offset
+
+  -- wrap around
+  if vim.g._capital_mark_index > #capitals then
+    vim.g._capital_mark_index = 1
+  elseif vim.g._capital_mark_index < 1 then
+    vim.g._capital_mark_index = #capitals
+  end
+
+  local mark = capitals[vim.g._capital_mark_index]
+  vim.api.nvim_set_current_buf(mark.bufnr)
+  vim.api.nvim_win_set_cursor(0, { mark.line, mark.col })
+end
+
+-- Forward
+vim.keymap.set("n", "<leader>mm", function()
+  jump_to_capital(1)
+end, { desc = "Cycle to next capital mark" })
+
+-- Reverse
+vim.keymap.set("n", "<leader>nn", function()
+  jump_to_capital(-1)
+end, { desc = "Cycle to previous capital mark" })

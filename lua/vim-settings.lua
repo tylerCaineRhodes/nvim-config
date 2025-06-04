@@ -163,3 +163,35 @@ end, { desc = "Cycle to next capital mark" })
 vim.keymap.set("n", "<leader>nn", function()
   jump_to_capital(-1)
 end, { desc = "Cycle to previous capital mark" })
+
+local function get_next_capital_mark()
+  local marks = vim.fn.getmarklist()
+  local used_marks = {}
+
+  -- Collect all used capital marks
+  for _, mark in ipairs(marks) do
+    local m = mark.mark
+    if m and m:match("^'[A-Z]$") then
+      used_marks[m:sub(2, 2)] = true
+    end
+  end
+
+  -- Find the next available capital mark
+  for i = 65, 90 do -- ASCII values for A-Z
+    local mark = string.char(i)
+    if not used_marks[mark] then
+      return mark
+    end
+  end
+
+  -- If all marks are used, start over from A
+  return "A"
+end
+
+local function set_next_capital_mark()
+  local next_mark = get_next_capital_mark()
+  vim.cmd("mark " .. next_mark)
+  print("Set mark " .. next_mark .. " at current position")
+end
+
+vim.keymap.set("n", "<leader>sm", set_next_capital_mark, { desc = "Set next capital mark" })

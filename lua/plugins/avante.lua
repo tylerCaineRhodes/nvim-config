@@ -15,6 +15,16 @@ return {
       max_tokens = 4096,
       -- reasoning_effort = "high" -- only supported for reasoning models (o1, etc.)
     },
+    selector = {
+      provider = "telescope",
+    },
+    windows = {
+      position = 'bottom',
+      height = 40
+    },
+    behavior = {
+      auto_suggestions = true,
+    }
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   build = "make",

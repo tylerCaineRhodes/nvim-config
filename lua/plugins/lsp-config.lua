@@ -37,7 +37,9 @@ return {
       local lspconfig = require("lspconfig")
       local servers = {
         lua_ls = {},
-        ts_ls = {},
+        ts_ls = {
+          filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
+        },
         html = {},
         jedi_language_server = {},
         pylsp = {},
@@ -79,8 +81,8 @@ return {
               additional_args = function() return { "--case-sensitive" } end,
             })
           end, vim.tbl_extend("force", opts, {
-            desc = "[G]rep References with Ripgrep (Case Sensitive)"
-          }))
+              desc = "[G]rep References with Ripgrep (Case Sensitive)"
+            }))
         end,
       })
     end,

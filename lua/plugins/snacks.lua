@@ -9,6 +9,7 @@ return {
     input = { enabled = false },
     indent = { enabled = false },
     words = { enabled = false },
+    picker = { enabled = true },
     notifier = {
       enabled = true,
       -- timeout = 3000,
@@ -33,8 +34,10 @@ return {
 
     -- bd
     { "<leader>bd", function() Snacks.bufdelete() end,             desc = "Delete Buffer" },
+    { "<leader>uC", function() Snacks.picker.colorschemes() end,             desc = "Colorschemes" },
     -- rename
     { "<leader>cR", function() Snacks.rename.rename_file() end,    desc = "Rename File" },
+    { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
     -- notifications
     -- { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
     { "<leader>un", function() Snacks.notifier.hide() end,         desc = "Dismiss All Notifications" },

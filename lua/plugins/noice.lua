@@ -1,7 +1,6 @@
 return {
   "folke/noice.nvim",
 
-  -- comment this back out later
   config = function()
     require("noice").setup({
       cmdline = { view = 'cmdline' },

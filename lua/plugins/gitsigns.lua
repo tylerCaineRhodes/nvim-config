@@ -7,6 +7,7 @@ return {
       delete = { text = "_" },
       topdelete = { text = "‾" },
       changedelete = { text = "~_" },
-    }
+    },
+    current_line_blame = true,
   }
 }

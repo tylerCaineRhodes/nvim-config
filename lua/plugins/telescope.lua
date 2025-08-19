@@ -32,11 +32,108 @@ return {
       vim.keymap.set("n", "<leader>fg", lazy_load_builtin("live_grep"))
       vim.keymap.set("n", "<leader>fw", lazy_load_builtin("grep_string"))
       vim.keymap.set("n", "<leader>fo", lazy_load_builtin("oldfiles"))
-      vim.keymap.set("n", "<leader>fb", lazy_load_builtin("buffers"))
+      vim.keymap.set("n", "<leader>fb", function()
+        require("lazy").load({ plugins = { "telescope.nvim" } })
+        vim.schedule(function()
+          require("telescope.builtin").buffers({
+            attach_mappings = function(_, map)
+              map("i", "<C-d>", function(prompt_bufnr)
+                local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+                local multi_selection = picker:get_multi_selection()
+                local current_selection = require("telescope.actions.state").get_selected_entry()
+                local buffers_to_delete = {}
+
+                if #multi_selection > 0 then
+                  for _, selection in ipairs(multi_selection) do
+                    table.insert(buffers_to_delete, selection.bufnr)
+                  end
+                else
+                  table.insert(buffers_to_delete, current_selection.bufnr)
+                end
+
+                for _, bufnr in ipairs(buffers_to_delete) do
+                  vim.api.nvim_buf_delete(bufnr, { force = true })
+                end
+                require("telescope.actions").close(prompt_bufnr)
+              end)
+              map("n", "<C-d>", function(prompt_bufnr)
+                local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+                local multi_selection = picker:get_multi_selection()
+                local current_selection = require("telescope.actions.state").get_selected_entry()
+                local buffers_to_delete = {}
+
+                if #multi_selection > 0 then
+                  for _, selection in ipairs(multi_selection) do
+                    table.insert(buffers_to_delete, selection.bufnr)
+                  end
+                else
+                  table.insert(buffers_to_delete, current_selection.bufnr)
+                end
+
+                for _, bufnr in ipairs(buffers_to_delete) do
+                  vim.api.nvim_buf_delete(bufnr, { force = true })
+                end
+                require("telescope.actions").close(prompt_bufnr)
+              end)
+              return true
+            end
+          })
+        end)
+      end)
       vim.keymap.set("n", "<leader>gt", lazy_load_builtin("git_status"))
       vim.keymap.set("n", "<leader>gc", lazy_load_builtin("git_commits"))
       vim.keymap.set("n", "<leader>gb", lazy_load_builtin("git_branches"))
-      vim.keymap.set("n", "<leader>ma", lazy_load_builtin("marks"))
+      vim.keymap.set("n", "<leader>ma", function()
+        require("lazy").load({ plugins = { "telescope.nvim" } })
+        vim.schedule(function()
+          require("telescope.builtin").marks({
+            attach_mappings = function(_, map)
+              map("i", "<C-d>", function(prompt_bufnr)
+                local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+                local multi_selection = picker:get_multi_selection()
+                local current_selection = require("telescope.actions.state").get_selected_entry()
+                local marks_to_delete = {}
+
+                if #multi_selection > 0 then
+                  for _, selection in ipairs(multi_selection) do
+                    table.insert(marks_to_delete, string.sub(selection.display, 1, 1))
+                  end
+                elseif current_selection then
+                  table.insert(marks_to_delete, string.sub(current_selection.display, 1, 1))
+                end
+
+                if #marks_to_delete > 0 then
+                  local marks_string = table.concat(marks_to_delete, "")
+                  vim.cmd("delmarks " .. marks_string)
+                  require("telescope.actions").close(prompt_bufnr)
+                end
+              end)
+
+              map("n", "<C-d>", function(prompt_bufnr)
+                local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+                local multi_selection = picker:get_multi_selection()
+                local current_selection = require("telescope.actions.state").get_selected_entry()
+                local marks_to_delete = {}
+
+                if #multi_selection > 0 then
+                  for _, selection in ipairs(multi_selection) do
+                    table.insert(marks_to_delete, string.sub(selection.display, 1, 1))
+                  end
+                elseif current_selection then
+                  table.insert(marks_to_delete, string.sub(current_selection.display, 1, 1))
+                end
+
+                if #marks_to_delete > 0 then
+                  local marks_string = table.concat(marks_to_delete, "")
+                  vim.cmd("delmarks " .. marks_string)
+                  require("telescope.actions").close(prompt_bufnr)
+                end
+              end)
+              return true
+            end
+          })
+        end)
+      end)
       vim.keymap.set("n", "<leader>fh", lazy_load_builtin("help_tags"))
       vim.keymap.set("n", "<leader>f/", function()
         require("lazy").load({ plugins = { "telescope.nvim" } })

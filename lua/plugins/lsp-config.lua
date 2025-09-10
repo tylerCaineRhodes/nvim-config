@@ -20,7 +20,9 @@ return {
           "html",
           "jedi_language_server",
           "pylsp",
-          "clangd"
+          "elixirls",
+          "ruby_lsp",
+          "terraformls",
         },
       })
     end,
@@ -47,10 +49,15 @@ return {
           mason = false,
           cmd = { vim.fn.expand("~/.rbenv/shims/ruby-lsp") }
         },
-        clangd = {},
         terraformls = {
           filetypes = { "terraform", "tf", "tfvars" },
+      },
+        elixirls = {
+          filetypes = { "elixir", "eelixir" },
         },
+        proto_ls = {
+          filetypes = { "proto" },
+        }
       }
 
       for server, config in pairs(servers) do

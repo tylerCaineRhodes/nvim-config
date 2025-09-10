@@ -48,6 +48,9 @@ return {
           cmd = { vim.fn.expand("~/.rbenv/shims/ruby-lsp") }
         },
         clangd = {},
+        terraformls = {
+          filetypes = { "terraform", "tf", "tfvars" },
+        },
       }
 
       for server, config in pairs(servers) do
@@ -70,7 +73,7 @@ return {
             vim.schedule(function()
               vim.lsp.buf.code_action()
             end)
-          end, opts)
+          end, opts, { desc = "[C]ode [A]ction" })
 
           vim.keymap.set("n", "gr", vim.lsp.buf.references,
             vim.tbl_extend("force", opts, { desc = "LSP References" }))
@@ -81,8 +84,8 @@ return {
               additional_args = function() return { "--case-sensitive" } end,
             })
           end, vim.tbl_extend("force", opts, {
-              desc = "[G]rep References with Ripgrep (Case Sensitive)"
-            }))
+            desc = "[G]rep References with Ripgrep (Case Sensitive)"
+          }))
         end,
       })
     end,

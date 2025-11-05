@@ -36,34 +36,39 @@ return {
     },
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      local lspconfig = require("lspconfig")
       local servers = {
         lua_ls = {},
         ts_ls = {
           filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
+          capabilities = capabilities,
         },
         html = {},
         jedi_language_server = {},
         pylsp = {},
         ruby_lsp = {
           mason = false,
-          cmd = { vim.fn.expand("~/.rbenv/shims/ruby-lsp") }
+          cmd = { vim.fn.expand("~/.rbenv/shims/ruby-lsp") },
+          capabilities = capabilities,
         },
         terraformls = {
           filetypes = { "terraform", "tf", "tfvars" },
+          capabilities = capabilities,
       },
         elixirls = {
           filetypes = { "elixir", "eelixir" },
+          capabilities = capabilities,
         },
-        proto_ls = {
+        buf_ls = {
           filetypes = { "proto" },
+          capabilities = capabilities,
         }
       }
 
-      for server, config in pairs(servers) do
-        config.capabilities = capabilities
-        lspconfig[server].setup(config)
+      for name, config in pairs(servers) do
+        vim.lsp.config(name, config)
+        vim.lsp.enable(name)
       end
+
 
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
@@ -74,13 +79,10 @@ return {
           vim.keymap.set("n", 'gd', require('telescope.builtin').lsp_definitions,
             vim.tbl_extend("force", opts, { desc = '[G]oto [D]efinition' }))
 
-
           vim.keymap.set({ "n", "v" }, "<leader>ca", function()
             require("lazy").load({ plugins = { "telescope-ui-select.nvim" } })
-            vim.schedule(function()
-              vim.lsp.buf.code_action()
-            end)
-          end, opts, { desc = "[C]ode [A]ction" })
+            vim.schedule(function() vim.lsp.buf.code_action() end)
+          end, vim.tbl_extend("force", opts, { desc = "[C]ode [A]ction" }))
 
           vim.keymap.set("n", "gr", vim.lsp.buf.references,
             vim.tbl_extend("force", opts, { desc = "LSP References" }))

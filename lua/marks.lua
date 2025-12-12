@@ -48,6 +48,8 @@ local function jump_to_capital(offset)
   local mark = capitals[vim.g._capital_mark_index]
   vim.api.nvim_set_current_buf(mark.bufnr)
   vim.api.nvim_win_set_cursor(0, { mark.line, mark.col })
+  vim.cmd("normal! zz")
+  -- vim.cmd("normal! zt")
 end
 
 -- Forward

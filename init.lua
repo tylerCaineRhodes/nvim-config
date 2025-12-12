@@ -87,5 +87,20 @@ require("scratch_helpers")
 
 require("lazy").setup("plugins", opts)
 
--- Load the colorscheme
-vim.cmd("colorscheme github_dark_high_contrast")
+local bg = (vim.env.NVIM_BACKGROUND or ""):lower()
+if bg == "light" or bg == "dark" then
+  vim.o.background = bg
+end
+
+local theme = vim.env.NVIM_THEME
+if theme and #theme > 0 then
+  pcall(vim.cmd.colorscheme, theme)
+else
+  if vim.o.background == "dark" then
+    pcall(vim.cmd.colorscheme, "tokyonight-night") -- default dark theme
+  else
+    pcall(vim.cmd.colorscheme, "vim") -- default light theme
+  end
+end
+
+require("snacks").indent.enable()

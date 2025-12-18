@@ -23,6 +23,10 @@ return {
         emoji.insert_kaomoji()
       end, { desc = 'search kaomoji' })
 
+      vim.keymap.set('i', '<C-s><C-s>', function()
+        emoji.insert_kaomoji()
+      end, { desc = 'search kaomoji (insert mode)' })
+
       vim.keymap.set('n', '<leader>sg', function()
         emoji.insert_kaomoji_by_group()
       end, { desc = 'search kaomoji by group' })

@@ -1,5 +1,5 @@
 
-vim.g.scratchfile_path = "/Users/tyler/Library/Application Support/JetBrains/RubyMine2025.2/scratches"
+vim.g.scratchfile_path = vim.fn.getenv("SCRATCHFILE_PATH")
 
 -- :ScratchNew {filename}
 vim.api.nvim_create_user_command("ScratchNew", function(opts)

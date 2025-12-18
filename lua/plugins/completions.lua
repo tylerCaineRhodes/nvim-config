@@ -1,5 +1,6 @@
 return {
   { "hrsh7th/cmp-nvim-lsp" },
+  { "hrsh7th/cmp-emoji" },
   {
     "L3MON4D3/LuaSnip",
     event = 'InsertEnter',
@@ -37,9 +38,10 @@ return {
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "luasnip" },
+          { name = "emoji", option = { insert = true } },
         }, {
-            { name = "buffer" },
-          }),
+          { name = "buffer" },
+        }),
       })
     end,
   },

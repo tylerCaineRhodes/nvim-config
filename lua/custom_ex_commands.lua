@@ -46,3 +46,8 @@ vim.api.nvim_create_user_command(
   '%!jq .',
   {}
 )
+
+vim.api.nvim_create_user_command('Dbopen', function()
+  vim.cmd('tabnew')
+  vim.cmd('DBUI')
+end, {})

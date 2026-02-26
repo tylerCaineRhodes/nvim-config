@@ -35,6 +35,8 @@ return {
             gs.nav_hunk('prev')
           end
         end)
+
+        map('n', '<leader>hp', gs.preview_hunk_inline, { desc = 'Preview hunk inline' })
       end,
     })
   end,

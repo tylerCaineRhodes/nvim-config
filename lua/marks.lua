@@ -95,6 +95,119 @@ end
 vim.keymap.set("n", "<leader>sm", set_next_capital_mark, { desc = "Set next capital mark" })
 
 local function annotate_marks()
+  require("lazy").load({ plugins = { "telescope.nvim" } })
+  vim.schedule(function()
+    local pickers = require("telescope.pickers")
+    local finders = require("telescope.finders")
+    local conf = require("telescope.config").values
+    local actions = require("telescope.actions")
+    local action_state = require("telescope.actions.state")
+
+    local raw_marks = vim.fn.getmarklist()
+    local by_letter = {}
+    for _, mark in ipairs(raw_marks) do
+      local m = mark.mark
+      local pos = mark.pos or {}
+      if m and m:match("^'[A-Z]$") and #pos >= 3 then
+        local letter = m:sub(2, 2)
+        by_letter[letter] = { file = mark.file, lnum = pos[2], col = pos[3] }
+      end
+    end
+
+    local entries = {}
+    for i = 65, 90 do
+      local letter = string.char(i)
+      local entry = by_letter[letter]
+      if entry then
+        table.insert(entries, {
+          letter = letter,
+          filename = entry.file,
+          lnum = entry.lnum,
+          col = entry.col,
+          display = letter .. ". " .. entry.file .. ":" .. entry.lnum,
+        })
+      end
+    end
+
+    if #entries == 0 then
+      print("No capital marks set")
+      return
+    end
+
+    pickers.new({}, {
+      prompt_title = "Capital Marks",
+      finder = finders.new_table({
+        results = entries,
+        entry_maker = function(entry)
+          return {
+            value = entry,
+            display = entry.display,
+            ordinal = entry.display,
+            filename = entry.filename,
+            lnum = entry.lnum,
+            col = entry.col,
+          }
+        end,
+      }),
+      previewer = conf.grep_previewer({}),
+      sorter = conf.generic_sorter({}),
+      attach_mappings = function(prompt_bufnr, map)
+        actions.select_default:replace(function()
+          local selection = action_state.get_selected_entry()
+          actions.close(prompt_bufnr)
+          if selection then
+            vim.cmd("normal! '" .. selection.value.letter)
+            vim.cmd("normal! zz")
+          end
+        end)
+
+        map({ "i", "n" }, "<C-d>", function()
+          local picker = action_state.get_current_picker(prompt_bufnr)
+          local multi = picker:get_multi_selection()
+          local to_delete = {}
+          if #multi > 0 then
+            for _, sel in ipairs(multi) do
+              table.insert(to_delete, sel.value.letter)
+            end
+          else
+            local sel = action_state.get_selected_entry()
+            if sel then
+              table.insert(to_delete, sel.value.letter)
+            end
+          end
+          if #to_delete > 0 then
+            vim.cmd("delmarks " .. table.concat(to_delete, ""))
+          end
+          actions.close(prompt_bufnr)
+        end)
+
+        map({ "i", "n" }, "<C-q>", function()
+          local picker = action_state.get_current_picker(prompt_bufnr)
+          local multi = picker:get_multi_selection()
+          local items = #multi > 0 and multi or { action_state.get_selected_entry() }
+          actions.close(prompt_bufnr)
+          local qf_items = {}
+          for _, sel in ipairs(items) do
+            table.insert(qf_items, {
+              filename = sel.filename,
+              lnum = sel.lnum,
+              col = sel.col,
+              text = sel.display,
+            })
+          end
+          vim.fn.setqflist(qf_items, "r")
+          vim.cmd("copen")
+        end)
+
+        return true
+      end,
+    }):find()
+  end)
+end
+
+vim.api.nvim_create_user_command("AnnotateMarks", annotate_marks, {})
+
+local function annotate_marks_slim()
   local marks = vim.fn.getmarklist()
   local by_letter = {}
 
@@ -164,4 +277,4 @@ local function annotate_marks()
   end, { buffer = buf, nowait = true })
 end
 
-vim.api.nvim_create_user_command("AnnotateMarks", annotate_marks, {})
+vim.api.nvim_create_user_command("AnnotateMarksSlim", annotate_marks_slim, {})

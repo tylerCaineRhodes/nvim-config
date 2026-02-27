@@ -93,3 +93,75 @@ local function set_next_capital_mark()
 end
 
 vim.keymap.set("n", "<leader>sm", set_next_capital_mark, { desc = "Set next capital mark" })
+
+local function annotate_marks()
+  local marks = vim.fn.getmarklist()
+  local by_letter = {}
+
+  for _, mark in ipairs(marks) do
+    local m = mark.mark
+    local pos = mark.pos or {}
+    if m and m:match("^'[A-Z]$") and #pos >= 3 then
+      local letter = m:sub(2, 2)
+      by_letter[letter] = { file = mark.file, line = pos[2] }
+    end
+  end
+
+  local lines = {}
+  for i = 65, 90 do
+    local letter = string.char(i)
+    local entry = by_letter[letter]
+    if entry then
+      table.insert(lines, letter .. ". " .. (entry.file or "?") .. ":" .. entry.line)
+    end
+  end
+
+  if #lines == 0 then
+    print("No capital marks set")
+    return
+  end
+
+  local buf = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+  vim.bo[buf].modifiable = false
+
+  local width = 0
+  for _, l in ipairs(lines) do
+    width = math.max(width, #l)
+  end
+  width = math.min(width + 2, vim.o.columns - 4)
+
+  local win = vim.api.nvim_open_win(buf, true, {
+    relative = "editor",
+    width = width,
+    height = #lines,
+    row = math.floor((vim.o.lines - #lines) / 2),
+    col = math.floor((vim.o.columns - width) / 2),
+    style = "minimal",
+    border = "rounded",
+    title = " Marks ",
+    title_pos = "center",
+  })
+
+  vim.wo[win].number = true
+
+  vim.keymap.set("n", "q", function()
+    vim.api.nvim_win_close(win, true)
+  end, { buffer = buf, nowait = true })
+
+  vim.keymap.set("n", "<Esc>", function()
+    vim.api.nvim_win_close(win, true)
+  end, { buffer = buf, nowait = true })
+
+  vim.keymap.set("n", "<CR>", function()
+    local cursor_line = vim.api.nvim_win_get_cursor(win)[1]
+    local selected = lines[cursor_line]
+    if not selected then return end
+    local letter = selected:sub(1, 1)
+    vim.api.nvim_win_close(win, true)
+    vim.cmd("normal! '" .. letter)
+    vim.cmd("normal! zz")
+  end, { buffer = buf, nowait = true })
+end
+
+vim.api.nvim_create_user_command("AnnotateMarks", annotate_marks, {})

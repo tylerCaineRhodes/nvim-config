@@ -184,15 +184,16 @@ local function annotate_marks()
         map({ "i", "n" }, "<C-q>", function()
           local picker = action_state.get_current_picker(prompt_bufnr)
           local multi = picker:get_multi_selection()
-          local items = #multi > 0 and multi or { action_state.get_selected_entry() }
           actions.close(prompt_bufnr)
           local qf_items = {}
-          for _, sel in ipairs(items) do
+          local source = #multi > 0 and multi or entries
+          for _, sel in ipairs(source) do
+            local fname = sel.filename or (sel.value and sel.value.filename)
             table.insert(qf_items, {
-              filename = sel.filename,
-              lnum = sel.lnum,
-              col = sel.col,
-              text = sel.display,
+              filename = vim.fn.expand(fname),
+              lnum = sel.lnum or (sel.value and sel.value.lnum),
+              col = sel.col or (sel.value and sel.value.col),
+              text = sel.display or (sel.value and sel.value.display),
             })
           end
           vim.fn.setqflist(qf_items, "r")

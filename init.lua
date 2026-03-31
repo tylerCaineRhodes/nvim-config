@@ -84,6 +84,7 @@ require("keymappings")
 require("marks")
 require("custom_ex_commands")
 require("scratch_helpers")
+require("custom_for_work")
 
 require("lazy").setup("plugins", opts)
 
@@ -103,4 +104,4 @@ else
   end
 end
 
-require("snacks").indent.enable()
+-- require("snacks").indent.enable()

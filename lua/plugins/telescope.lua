@@ -112,7 +112,10 @@ return {
           "--exclude", ".cache",
           "--exclude", "log",
           "--exclude", "tmp",
-        },
+          },
+          preview = {
+            treesitter = false,
+          },
       })
 
       require("telescope").setup(opts)

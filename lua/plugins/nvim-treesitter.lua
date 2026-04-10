@@ -18,6 +18,11 @@ return {
       vim.api.nvim_create_autocmd("FileType", {
         callback = function()
           local ft = vim.bo.filetype
+
+          if not vim.tbl_contains(languages, ft) then
+            return
+          end
+
           if ft ~= "" then
             require("nvim-treesitter").install(ft)
           end

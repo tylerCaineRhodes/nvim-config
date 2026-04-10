@@ -72,7 +72,7 @@ return {
         terraformls = {
           filetypes = { "terraform", "tf", "tfvars" },
           capabilities = capabilities,
-      },
+        },
         elixirls = {
           filetypes = { "elixir", "eelixir" },
           capabilities = capabilities,
@@ -80,7 +80,11 @@ return {
         buf_ls = {
           filetypes = { "proto" },
           capabilities = capabilities,
-        }
+        },
+        yaml_ls = {
+          filetypes = { "yaml", "yml" },
+          capabilities = capabilities,
+        },
       }
 
       for name, config in pairs(servers) do

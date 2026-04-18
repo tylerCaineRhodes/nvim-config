@@ -6,6 +6,7 @@ vim.g.smoothscroll = false
 vim.opt.cursorline = false
 vim.g.annotate_marks = false
 vim.g.overwrite_tabs_like_a_savage = false
+vim.opt.termguicolors = true
 
 vim.cmd("let g:VimuxHeight = '30%'")
 vim.cmd("set number")

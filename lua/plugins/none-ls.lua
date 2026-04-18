@@ -7,12 +7,19 @@ return {
       sources = {
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.prettier.with({
-          filetypes = { "javascript", "typescript", "typescriptreact" },
+          filetypes = { "javascript", "typescript", "typescriptreact", "json", "yaml" },
         }),
         null_ls.builtins.formatting.black,
         null_ls.builtins.formatting.isort,
         null_ls.builtins.formatting.rubocop,
         null_ls.builtins.diagnostics.rubocop,
+        null_ls.builtins.diagnostics.yamllint,
+        null_ls.builtins.diagnostics.haml_lint.with({
+          filetypes = { "haml" },
+        }),
+        null_ls.builtins.formatting.shfmt.with({
+          filetypes = { "sh" },
+        }),
       },
     })
     vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})

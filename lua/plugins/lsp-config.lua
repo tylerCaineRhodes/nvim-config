@@ -1,5 +1,14 @@
 return {
   {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = {
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
+  },
+  {
     "williamboman/mason.nvim",
     lazy = true,
     cmd = "Mason",
@@ -32,12 +41,22 @@ return {
     event = "BufReadPre",
     dependencies = {
       "mason-lspconfig.nvim",
-      "hrsh7th/cmp-nvim-lsp", -- for capabilities
+      "hrsh7th/cmp-nvim-lsp",
+      "folke/lazydev.nvim",
     },
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local servers = {
-        lua_ls = {},
+        lua_ls = {
+          settings = {
+            Lua = {
+              completion = {
+                callSnippet = "Replace",
+              },
+            },
+          },
+          capabilities = capabilities,
+        },
         ts_ls = {
           filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
           capabilities = capabilities,
@@ -53,7 +72,7 @@ return {
         terraformls = {
           filetypes = { "terraform", "tf", "tfvars" },
           capabilities = capabilities,
-      },
+        },
         elixirls = {
           filetypes = { "elixir", "eelixir" },
           capabilities = capabilities,
@@ -61,7 +80,11 @@ return {
         buf_ls = {
           filetypes = { "proto" },
           capabilities = capabilities,
-        }
+        },
+        yaml_ls = {
+          filetypes = { "yaml", "yml" },
+          capabilities = capabilities,
+        },
       }
 
       for name, config in pairs(servers) do

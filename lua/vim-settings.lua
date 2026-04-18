@@ -9,7 +9,7 @@ vim.g.overwrite_tabs_like_a_savage = false
 vim.opt.termguicolors = true
 
 vim.cmd("let g:VimuxHeight = '30%'")
-vim.cmd("set number")
+vim.cmd("set number relativenumber")
 vim.cmd("set expandtab")
 vim.cmd("set tabstop=2")
 vim.cmd("set softtabstop=2")

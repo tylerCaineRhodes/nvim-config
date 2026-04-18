@@ -1,32 +1,29 @@
 return {
   "yetone/avante.nvim",
-  -- event = "VeryLazy",
-  lazy = true,
+  event = "VeryLazy",
+  -- lazy = true,
   version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
   opts = {
     -- add any opts here
     -- for example
-    provider = "openai",
+    provider = "claude",
     providers = {
       openai = {
-        endpoint = "https://api.openai.com/v1",
-        model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+        endpoint = "https://api.anthropic.com",
+        model = "claude-sonnet-4-5-20250929", -- your desired model (or use gpt-4o, etc.)
         timeout = 30000, -- timeout in milliseconds
         extra_request_body = {
-          temperature = 0, -- adjust if needed
+          temperature = 0.75, -- adjust if needed
           max_completion_tokens = 8192,
           -- reasoning_effort = "high" -- only supported for reasoning models (o1, etc.)
         },
       },
     },
-    -- selector = {
-    --   -- provider = "telescope",
-    -- },
     windows = {
       position = 'right',
       width = 40,
     },
-    behavior = {
+    behaviour = {
       auto_suggestions = true,
       enable_fastapply = true,
     }
@@ -70,6 +67,6 @@ return {
       },
       ft = {  "Avante" },
     },
-  },
-  cmd = "AvanteToggle"
+  }
+  -- cmd = "AvanteToggle"
 }

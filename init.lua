@@ -103,4 +103,5 @@ else
   end
 end
 
-require("snacks").indent.enable()
+-- default indent settings
+-- require("snacks").indent.enable()

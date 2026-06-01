@@ -9,6 +9,12 @@ return {
         globalstatus = true,
       },
       sections = {
+        lualine_c = {
+          {
+            "filename",
+            path = 1,
+          }
+        },
         lualine_x = {
           {
             require("noice").api.statusline.mode.get,

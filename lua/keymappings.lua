@@ -12,10 +12,10 @@ vim.keymap.set("v", "<C-c>", '"*y', {})
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", {})
 
 vim.keymap.set("n", "<leader>cf", function()
-  local filepath = vim.api.nvim_buf_get_name(0)
+  local filepath = vim.fn.expand("%:.")
   vim.fn.setreg("+", filepath)
-  print("Copied full path to clipboard: " .. filepath)
-end, { desc = "Copy full file path to clipboard" })
+  print("Copied relative path to clipboard: " .. filepath)
+end, { desc = "Copy relative file path to clipboard" })
 
 vim.keymap.set("n", "<leader>cd", function()
   local dirname = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":h")

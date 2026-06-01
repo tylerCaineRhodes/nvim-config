@@ -55,6 +55,12 @@ vim.cmd("inoremap jk <esc>")
 -- vim.opt.showmode = false -- don't show twice when using lualine
 vim.cmd('set cmdheight=0') -- collapse unless output is needed
 
+-- for buffer to auto-reload after changes
+vim.o.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+  command = "checktime",
+})
+
 vim.api.nvim_exec([[
   autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
 ]], false)

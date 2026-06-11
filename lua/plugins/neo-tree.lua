@@ -3,7 +3,7 @@ return {
   keys = {
     '\\',
   },
-  cmd =  { "Neotree" },
+  cmd = { "Neotree" },
   branch = "v3.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -12,12 +12,13 @@ return {
     "3rd/image.nvim",
   },
   config = function()
-    vim.keymap.set("n", "\\", ":Neotree filesystem reveal left toggle<Enter>")
+    vim.keymap.set("n", "\\", ":Neotree filesystem reveal left toggle reveal_force_cwd<Enter>")
 
     require("neo-tree").setup({
       filesystem = {
         follow_current_file = { enabled = true },
         use_libuv_file_watcher = true,
+        reveal_force_cwd = true,
       },
       window = {
         mappings = {

@@ -5,6 +5,9 @@ return {
       neo_tree = {
         enabled = false,
       },
+      diff = {
+        layout = "inline",
+      }
     })
   end,
 }

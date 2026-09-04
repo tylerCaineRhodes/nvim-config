@@ -30,7 +30,7 @@ return {
 
       vim.keymap.set("n", "<leader>ff", lazy_load_builtin("find_files"))
       vim.keymap.set("n", "<leader>fg", lazy_load_builtin("live_grep"))
-      vim.keymap.set("n", "<leader>fw", lazy_load_builtin("grep_string"))
+      vim.keymap.set({ "n", "v" }, "<leader>fw", lazy_load_builtin("grep_string"))
       vim.keymap.set("n", "<leader>fo", lazy_load_builtin("oldfiles"))
       vim.keymap.set("n", "<leader>fb", function()
         require("lazy").load({ plugins = { "telescope.nvim" } })

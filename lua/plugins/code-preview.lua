@@ -7,6 +7,7 @@ return {
       },
       diff = {
         layout = "inline",
+        defer_claude_permissions = true,
       }
     })
   end,
